@@ -1,8 +1,10 @@
 import os
+
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
+import sys
 
 # load features matrix/labels
 train_matrix = np.load('enron_features_matrix.npy')
@@ -38,10 +40,7 @@ naiveBayesM.fit(X_train,y_train)
 
 
 # make a guess
-prediction_res= naiveBayesM.predict(extract_features('hello I like this website, the tutorial was really helpful'))
+if __name__ == "__main__":
+    prediction_res= naiveBayesM.predict(extract_features(sys.argv[1]))
+    print("SPAM " if prediction_res == 1.0 else "NOT SPAM")
 
-print(prediction_res)
-
-
-
-#print (confusion_matrix(y_test, prediction_res))
