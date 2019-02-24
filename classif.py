@@ -4,7 +4,6 @@ from collections import Counter
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import confusion_matrix
-from sklearn.svm import LinearSVC
 
 
 def make_Dictionary(root_dir):
@@ -89,24 +88,17 @@ print (sum(labels==0),sum(labels==1))
 X_train, X_test, y_train, y_test = train_test_split(features_matrix, labels, test_size=0.40)
 
 ## Training models and its variants
-
-model1 = LinearSVC()
-model2 = MultinomialNB()
+model = MultinomialNB()
 
 # train
-model1.fit(X_train,y_train)
-model2.fit(X_train,y_train)
+model.fit(X_train,y_train)
 
-result1 = model1.predict(X_test)
-result2 = model2.predict(X_test)
+result = model.predict(X_test)
 
 # Confustion Matrix: The number of correct and incorrect predictions are summarized with count
 # values and broken down by each class. This is the key to the confusion matrix.
 """
 example confusion matrix output with 5172 messages
-- LinearSVC:
-    [[1404   53]
-    [  31  581]]
 
 - MultinomialNB
     [[1380   77]
@@ -125,6 +117,5 @@ The table above shows:
 - Expected down the side: Each row of the matrix corresponds to a predicted class.
 - Predicted across the top: Each column of the matrix corresponds to an actual class.
 """
-print (confusion_matrix(y_test, result1))
-print (confusion_matrix(y_test, result2))
+print (confusion_matrix(y_test, result))
 
