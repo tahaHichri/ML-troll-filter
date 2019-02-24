@@ -42,8 +42,8 @@ def extract_features(root_dir):
         dirs = [os.path.join(data_dir,f) for f in os.listdir(data_dir)]
         for d in dirs:
             messages = [os.path.join(d,f) for f in os.listdir(d)]
-            for message in messages:
-                with open(mail) as m:
+            for messageFile in messages:
+                with open(messageFile) as m:
                     all_words = []
                     for line in m:
                         words = line.split()
@@ -58,7 +58,7 @@ def extract_features(root_dir):
                           features_matrix[docID,wordID] = all_words.count(word)
 
                 # labels: True -> 1, False -> 0
-                train_labels[docID] = int(mail.split(".")[-2] == 'spam')  
+                train_labels[docID] = int(messageFile.split(".")[-2] == 'spam')  
                 docID = docID + 1                
     return features_matrix, train_labels
     
